@@ -1,6 +1,3 @@
-// not working at this point in time, code runs but answer is not good
-//
-
 #include <bits/stdc++.h>
 #include <cstring>
 
@@ -19,37 +16,68 @@ string rtrim(const string &);
  */
 
 int countingValleys(int steps, string path) {
-    int currentStep, valleys = 0;
+    int currentStep = 0;
+    int valleys = 0;
     char currentStepChar[2] = {0, 0};
-
-    std::cout << "steps: " << steps << std::endl;
-    std::cout << "currentStep: " << currentStep << std::endl;
+    char nextStepChar[2] = {0, 0};
+    bool equalsD = -1;
+    
     for(int i = 0; i < steps; i++) {
-        std::cout << "currentStep: " << currentStep << std::endl;
-        if(i < steps && currentStep == 0) {
-            std::cout << "got the zero" << " i: " << i << std::endl;
-            std::cout << "next step is: " << path[++i] << std::endl;
-            std::cout << "less than steps: " << (i < steps) << std::endl;
-            bool equals = path.compare(++i, 1, std::string("D"));
-            //std::cout << "next step equals D: " << (path.compare(++i, 1, std::string("D"))) << std::endl;
-            //std::cout << "equals: " << std::string::compare(path[++i], "D") <<
-            currentStepChar[0] = path[++i];
-            std::cout << "currentStepChar: " << currentStepChar << std::endl;
-            std::cout << "equals: " << strcasecmp(currentStepChar, "D") << std::endl;
+        std::cout << path[i];
+        currentStepChar[0] = path[i];
+        equalsD =  strcasecmp(currentStepChar, "D");
+        
+        if(equalsD == 0) {
+            currentStep--;
+        } else {
+            currentStep++;
         }
-
-        if(i < steps && currentStep == 0 && path[++i] == 'D') {
+        
+        if(i==0 && currentStep == -1) {
+            valleys++;
+        }
+        
+        //std::cout << "char: " << currentStepChar << " i: " << path[i] << " equalsD: " << equalsD << "currStep: " << currentStep << std::endl;
+        
+        
+        if(i < steps && currentStep == 0) {
+            bool equals = path.compare(i+1, 1, std::string("D"));
+            currentStepChar[0] = path[i+1];        
+        }
+        
+        nextStepChar[0] = path[i+1];
+        equalsD =  strcasecmp(nextStepChar, "D");
+        if(i < steps && currentStep == 0 && equalsD == 0) {
             std::cout << "increment valleys" << std::endl;
             valleys++;
         }
-
-        std::cout << "path[i]: " << path[i] << std::endl;
-        if(path[i] == 'D') {
-            currentStep--;
-        } else if(path[i] == 'U') {
-            currentStep++;
-        }
     }
+    std::cout << std::endl;
+    
+    // for(int i = 0; i < steps; i++) {
+    //     currentStepChar[0] = path[i];
+    //     //std::cout << "char: " << currentStepChar << " i: " << path[i] << std::endl;
+    //     equalsD =  strcasecmp(currentStepChar, "D");
+    //     if(equalsD == 0) {
+    //         currentStep--;
+    //     } else {
+    //         currentStep++;
+    //     }
+        
+    //     //std::cout << "currentStep: " << currentStep << "char: " << currentStepChar << std::endl;
+        
+    //     if(i < steps && currentStep == 0) {
+    //         bool equals = path.compare(++i, 1, std::string("D"));
+    //         currentStepChar[0] = path[++i];        
+    //     }
+        
+    //     nextStepChar[0] = path[++i];
+    //     equalsD =  strcasecmp(nextStepChar, "D");
+    //     if(i < steps && currentStep == 0 && equalsD == 0) {
+    //         std::cout << "increment valleys" << std::endl;
+    //         valleys++;
+    //     }
+    // }
     return valleys;
 }
 
@@ -95,4 +123,4 @@ string rtrim(const string &str) {
 
     return s;
 }
-
+ 
