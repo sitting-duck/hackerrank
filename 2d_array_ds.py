@@ -15,19 +15,27 @@ import sys
 
 def sumHourGlass(x, y, arr):
     sum = arr[y][x]
+    print("arr[y][x]: " + str(arr[y][x]))
     sum += arr[y][x+1]
+    print("arr[y][x+1]: " + str(arr[y][x+1]))
     sum += arr[y][x+2]
+    print("arr[y][x+2]: " + str(arr[y][x+2]))
     sum += arr[y+1][x+1]
+    print("arr[y+1][x+1]: " + str(arr[y+1][x+1]))
     sum += arr[y+2][x]
+    print("arr[y+2][x]: " + str(arr[y+2][x]))
     sum += arr[y+2][x+1]
+    print("arr[y+2][x+1]: " + str(arr[y+2][x+1]))
     sum += arr[y+2][x+2]
+    print("arr[y+2][x+2]: " + str(arr[y+2][x+2]))
     return sum
 
 def hourglassSum(arr):
-    highest = 0
+    highest = -10000
     for x in range(0, 4):
         for y in range(0, 4):
             current = sumHourGlass(x, y, arr)
+            print("current: " + str(current) + " x: " + str(x) + " y: " + str(y))
             if current > highest:
                 highest = current
     return highest                
